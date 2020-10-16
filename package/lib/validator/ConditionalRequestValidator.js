@@ -28,8 +28,7 @@ class ConditionalRequestValidator {
             // The only allowed value in these cases is '*'. Careless clients send this also for DELETE and POST,
             // other careless clients send the star in doublequotes.
             if ([HttpMethods.PATCH, HttpMethods.PUT, HttpMethods.DELETE, HttpMethods.POST].includes(method)) {
-                if (ifMatch && ifMatch.trim() !== '*' && ifMatch.trim() !== '"*"'
-                    || ifNoneMatch && ifNoneMatch.trim() !== '*' && ifNoneMatch.trim() !== '"*"') {
+                if (ifNoneMatch && ifNoneMatch.trim() !== '*' && ifNoneMatch.trim() !== '"*"') {
                     throw new PreconditionFailedError();
                 }
             } else if (method !== HttpMethods.GET
@@ -56,7 +55,7 @@ class ConditionalRequestValidator {
         const ifMatchEtags = ifMatch ? this._parseHeaderEtagValue(ifMatch) : [];
         const ifNoneMatchEtags = ifNoneMatch ? this._parseHeaderEtagValue(ifNoneMatch) : [];
 
-        if (ifMatch && !ifMatchEtags.includes(etag) && !ifMatchEtags.includes('*')) throw new PreconditionFailedError();
+        // if (ifMatch && !ifMatchEtags.includes(etag) && !ifMatchEtags.includes('*')) throw new PreconditionFailedError();
 
         if (method !== HttpMethods.GET && method !== HttpMethods.HEAD
             && (ifNoneMatchEtags.includes(etag)
