@@ -1,6 +1,6 @@
 {
   "name": "@sap/odata-server",
-  "version": "1.8.3",
+  "version": "1.8.5",
   "description": "OData V4.0 provisioning library",
   "main": "index.js",
   "license": "SEE LICENSE IN developer-license-3.1.txt",
